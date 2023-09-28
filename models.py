@@ -107,6 +107,7 @@ class Embeds(nn.Module):
         self.embedding2 = nn.Embedding(self.sizes[2], self.embedding_dim)
         self.embedding3 = nn.Embedding(self.sizes[3], int(self.embedding_dim / 2))
         self.embedding4 = nn.Embedding(self.sizes[4], self.embedding_dim)
+        # sizes为读取的300w条数据的各个id的max(id)+1；没太看懂原文取的是每个batch的size还是所有数据的size
 
         self.base_embed_dim = self.embedding_dim * 5 + int(self.embedding_dim / 2)
         self.bias_embed_dim = self.embedding_dim
@@ -118,7 +119,7 @@ class Embeds(nn.Module):
     def forward(self, action, pre_embed):
         """
         get embedding of user, device, item, author and duration ids
-        transform id to one-hot to embeddings by learnable linear transformation
+        transform ids to embeddings by nn.Embedding()
         """
         id_map = {'userid': 0, 'feedid': 1, 'duration_level': 2, 'device': 3, 'authorid': 4, 'pre': 5}
 
