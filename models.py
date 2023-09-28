@@ -128,6 +128,9 @@ class Embeds(nn.Module):
         device_embed = self.embedding3(action[:, 3])
         author_embed = self.embedding4(action[:, 4])
         pre_embed = nn.Embedding.from_pretrained(pre_embed, freeze=True)(action[:, 1])  # 红豆泥？？？
+        # 这里导入的pre_embed文件是feed_id的预训练的embedding，压缩为了大小为[feed_id_size, 64]的embedding
+        # feed_id_size为300w条数据中max(feed_id)+1
+
 
         embed_base = torch.concatenate((user_embed, feed_embed, duration_embed, device_embed, author_embed, pre_embed), dim=-1)
         # embed_base = torch.concatenate((user_embed, feed_embed, duration_embed, device_embed, author_embed), dim=-1)
