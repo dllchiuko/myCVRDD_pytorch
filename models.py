@@ -18,9 +18,7 @@ class CVRDD(nn.Module):
         self.dropout = dropout
         self.alpha = alpha
         self.kl = kl
-        self.fusion_mode = fusion_mode
-
-        self.cat = torch.concat
+        self.fusion_mode = fusion_mod
 
         # initialize embedding methods
         self.sizes = getattr(Data(), 'features_sizes')
